@@ -15,16 +15,23 @@ ticking = false;
 
 function scrapeURLs() {
   // lazy regex for all 1x urls
-  var urls = document.documentElement.innerHTML.match(
-    /(?<=src)=.+?(?=\.jpg!)/g
-  );
+  var urls = document.documentElement.innerHTML.match(/(?<=src)=.+?(?=\!)/g);
+  // console.log(urls.length);
   // process the fluff matching text
   // urls = urls.map((url) => console.log(url));
-  urls = urls.map((url) => url.slice(2, url.length - 1) + ".jpg");
+  urls = urls.map((url) => {
+    url = url.slice(2, url.length);
+    let extensionMatches = url.match(/.jpg/);
+    if (extensionMatches.length > 1) {
+      url = url.slice(0, url.length - 4);
+    }
+    return url;
+  });
   // join the new URLs with the old ones
-  storedURLs = storedURLs.concat(urls).unique();
+  // storedURLs = storedURLs.concat(urls).unique();
   console.log("images found: " + storedURLs.length);
-  console.log(storedURLs);
+  // console.log(storedURLs);
+  storedURLs = urls;
 }
 
 window.addEventListener("scroll", function (e) {
