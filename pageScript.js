@@ -26,7 +26,9 @@ function scrapeURLs() {
 window.addEventListener("scroll", function (e) {
   if (!ticking) {
     window.requestAnimationFrame(function () {
+      //   doSomething();
       scrapeURLs();
+
       ticking = false;
     });
 
@@ -38,5 +40,5 @@ scrapeURLs();
 
 console.log("images will automagically be captured on scroll");
 console.log(
-  "after completion paste\n copy(storedURLs);\ninto the CLI to capture the URLs"
+  "after completion paste\n copy(storedUrls);\ninto the CLI to capture the URLs"
 );
